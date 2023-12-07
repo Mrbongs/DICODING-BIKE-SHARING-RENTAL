@@ -44,10 +44,17 @@ fig, ax = plt.subplots()
 sns.scatterplot(data=filtered_data, x='temp', y='count', ax=ax)
 st.pyplot(fig)
 
+# Visualization - Histogram of Casual vs Registered Users
 st.subheader('Histogram of Casual vs Registered Users')
 fig, ax = plt.subplots()
-sns.histplot(filtered_data, x='casual', color='blue', label='Casual', kde=True, ax=ax)
-sns.histplot(filtered_data, x='registered', color='red', label='Registered', kde=True, ax=ax)
+
+# Ensure that 'casual' and 'registered' are numeric and available
+if 'casual' in filtered_data.columns and 'registered' in filtered_data.columns:
+    sns.histplot(filtered_data['casual'], color='blue', label='Casual', kde=True, ax=ax)
+    sns.histplot(filtered_data['registered'], color='red', label='Registered', kde=True, ax=ax)
+else:
+    st.write('Data for casual or registered users is not available')
+
 plt.legend()
 st.pyplot(fig)
 
