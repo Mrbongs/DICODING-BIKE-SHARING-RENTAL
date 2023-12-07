@@ -4,7 +4,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Load data
-@st.cache
+@st.experimental_memo
 def load_data():
     data = pd.read_csv('day.csv')
     data['dateday'] = pd.to_datetime(data['dateday'])  # Convert 'dateday' to datetime format
@@ -22,20 +22,20 @@ filtered_data = df[(df['season'] == season) & (df['Weather_cond'] == weather)]
 # Display data
 st.write("Filtered Data", filtered_data)
 
-# Sidebar untuk fitur input pengguna
+# Sidebar for date range input
 st.sidebar.header('Filter by Date Range')
 start_date = st.sidebar.date_input('Start Date', df['dateday'].min().date())
 end_date = st.sidebar.date_input('End Date', df['dateday'].max().date())
 
-# Konversi start_date dan end_date ke datetime jika belum
+# Convert to datetime if not already
 start_date = pd.to_datetime(start_date)
 end_date = pd.to_datetime(end_date)
 
-# Pastikan start date tidak setelah end date
+# Ensure start date is before end date
 if start_date > end_date:
     st.sidebar.error('Error: End date must fall after start date.')
 
-# Filter data berdasarkan input pengguna
+# Filter data based on date range
 filtered_data = df[(df['dateday'] >= start_date) & (df['dateday'] <= end_date)]
 
 # Visualization
