@@ -44,23 +44,6 @@ fig, ax = plt.subplots()
 sns.scatterplot(data=filtered_data, x='temp', y='count', ax=ax)
 st.pyplot(fig)
 
-# Visualization - Histogram of Casual vs Registered Users
-st.subheader('Histogram of Casual vs Registered Users')
-fig, ax = plt.subplots()
-
-# Convert 'casual' and 'registered' to NumPy arrays
-if 'casual' in filtered_data.columns and 'registered' in filtered_data.columns:
-    casual_data = filtered_data['casual'].to_numpy()
-    registered_data = filtered_data['registered'].to_numpy()
-    
-    sns.histplot(casual_data, color='blue', label='Casual', kde=True, ax=ax)
-    sns.histplot(registered_data, color='red', label='Registered', kde=True, ax=ax)
-else:
-    st.write('Data for casual or registered users is not available')
-
-plt.legend()
-st.pyplot(fig)
-
 # Additional Visualizations for Streamlit App
 
 # Bar Chart: Total Bike Rentals by Season
