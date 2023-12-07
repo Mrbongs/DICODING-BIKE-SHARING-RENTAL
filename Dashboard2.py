@@ -4,7 +4,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Load data
-@st.experimental_memo
+@st.cache_data
 def load_data():
     data = pd.read_csv('day.csv')
     data['dateday'] = pd.to_datetime(data['dateday'])  # Convert 'dateday' to datetime format
